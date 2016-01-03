@@ -1,12 +1,12 @@
-package com.yalantis.euclid.sample;
+package com.yalantis.isg245.sample;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
-import com.yalantis.euclid.library.EuclidActivity;
-import com.yalantis.euclid.library.EuclidListAdapter;
+import com.isg245.profileinterface.EuclidActivity;
+import com.isg245.profileinterface.EuclidListAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;

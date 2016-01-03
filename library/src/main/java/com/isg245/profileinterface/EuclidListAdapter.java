@@ -1,4 +1,4 @@
-package com.yalantis.euclid.library;
+package com.isg245.profileinterface;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -36,12 +36,12 @@ public class EuclidListAdapter extends ArrayAdapter<Map<String, Object>> {
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.list_item, parent, false);
+            convertView = mInflater.inflate(com.isg245.profileinterface.R.layout.list_item, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.mViewOverlay = convertView.findViewById(R.id.view_avatar_overlay);
-            viewHolder.mListItemAvatar = (ImageView) convertView.findViewById(R.id.image_view_avatar);
-            viewHolder.mListItemName = (TextView) convertView.findViewById(R.id.text_view_name);
-            viewHolder.mListItemDescription = (TextView) convertView.findViewById(R.id.text_view_description);
+            viewHolder.mViewOverlay = convertView.findViewById(com.isg245.profileinterface.R.id.view_avatar_overlay);
+            viewHolder.mListItemAvatar = (ImageView) convertView.findViewById(com.isg245.profileinterface.R.id.image_view_avatar);
+            viewHolder.mListItemName = (TextView) convertView.findViewById(com.isg245.profileinterface.R.id.text_view_name);
+            viewHolder.mListItemDescription = (TextView) convertView.findViewById(com.isg245.profileinterface.R.id.text_view_description);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -49,7 +49,7 @@ public class EuclidListAdapter extends ArrayAdapter<Map<String, Object>> {
 
         Picasso.with(getContext()).load((Integer) mData.get(position).get(KEY_AVATAR))
                 .resize(EuclidActivity.sScreenWidth, EuclidActivity.sProfileImageHeight).centerCrop()
-                .placeholder(R.color.blue)
+                .placeholder(com.isg245.profileinterface.R.color.blue)
                 .into(viewHolder.mListItemAvatar);
 
         viewHolder.mListItemName.setText(mData.get(position).get(KEY_NAME).toString().toUpperCase());

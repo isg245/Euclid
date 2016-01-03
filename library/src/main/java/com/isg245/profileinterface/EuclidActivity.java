@@ -1,4 +1,4 @@
-package com.yalantis.euclid.library;
+package com.isg245.profileinterface;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -10,7 +10,6 @@ import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -76,23 +75,23 @@ public abstract class EuclidActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_euclid);
+        setContentView(com.isg245.profileinterface.R.layout.activity_euclid);
 
-        mWrapper = (RelativeLayout) findViewById(R.id.wrapper);
-        mListView = (ListView) findViewById(R.id.list_view);
-        mToolbar = (FrameLayout) findViewById(R.id.toolbar_list);
-        mToolbarProfile = (RelativeLayout) findViewById(R.id.toolbar_profile);
-        mProfileDetails = (LinearLayout) findViewById(R.id.wrapper_profile_details);
-        mTextViewProfileName = (TextView) findViewById(R.id.text_view_profile_name);
-        mTextViewProfileDescription = (TextView) findViewById(R.id.text_view_profile_description);
-        mButtonProfile = findViewById(R.id.button_profile);
+        mWrapper = (RelativeLayout) findViewById(com.isg245.profileinterface.R.id.wrapper);
+        mListView = (ListView) findViewById(com.isg245.profileinterface.R.id.list_view);
+        mToolbar = (FrameLayout) findViewById(com.isg245.profileinterface.R.id.toolbar_list);
+        mToolbarProfile = (RelativeLayout) findViewById(com.isg245.profileinterface.R.id.toolbar_profile);
+        mProfileDetails = (LinearLayout) findViewById(com.isg245.profileinterface.R.id.wrapper_profile_details);
+        mTextViewProfileName = (TextView) findViewById(com.isg245.profileinterface.R.id.text_view_profile_name);
+        mTextViewProfileDescription = (TextView) findViewById(com.isg245.profileinterface.R.id.text_view_profile_description);
+        mButtonProfile = findViewById(com.isg245.profileinterface.R.id.button_profile);
         mButtonProfile.post(new Runnable() {
             @Override
             public void run() {
                 mInitialProfileButtonX = mButtonProfile.getX();
             }
         });
-        findViewById(R.id.toolbar_profile_back).setOnClickListener(new View.OnClickListener() {
+        findViewById(com.isg245.profileinterface.R.id.toolbar_profile_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 animateCloseProfileDetails();
@@ -100,7 +99,7 @@ public abstract class EuclidActivity extends Activity {
         });
 
         sScreenWidth = getResources().getDisplayMetrics().widthPixels;
-        sProfileImageHeight = getResources().getDimensionPixelSize(R.dimen.height_profile_image);
+        sProfileImageHeight = getResources().getDimensionPixelSize(com.isg245.profileinterface.R.dimen.height_profile_image);
         sOverlayShape = buildAvatarCircleOverlay();
 
         initList();
@@ -150,24 +149,24 @@ public abstract class EuclidActivity extends Activity {
      */
     private void addOverlayListItem(Map<String, Object> item, View view) {
         if (mOverlayListItemView == null) {
-            mOverlayListItemView = getLayoutInflater().inflate(R.layout.overlay_list_item, mWrapper, false);
+            mOverlayListItemView = getLayoutInflater().inflate(com.isg245.profileinterface.R.layout.overlay_list_item, mWrapper, false);
         } else {
             mWrapper.removeView(mOverlayListItemView);
         }
 
-        mOverlayListItemView.findViewById(R.id.view_avatar_overlay).setBackground(sOverlayShape);
+        mOverlayListItemView.findViewById(com.isg245.profileinterface.R.id.view_avatar_overlay).setBackground(sOverlayShape);
 
         Picasso.with(EuclidActivity.this).load((Integer) item.get(EuclidListAdapter.KEY_AVATAR))
                 .resize(sScreenWidth, sProfileImageHeight).centerCrop()
-                .placeholder(R.color.blue)
-                .into((ImageView) mOverlayListItemView.findViewById(R.id.image_view_reveal_avatar));
+                .placeholder(com.isg245.profileinterface.R.color.blue)
+                .into((ImageView) mOverlayListItemView.findViewById(com.isg245.profileinterface.R.id.image_view_reveal_avatar));
         Picasso.with(EuclidActivity.this).load((Integer) item.get(EuclidListAdapter.KEY_AVATAR))
                 .resize(sScreenWidth, sProfileImageHeight).centerCrop()
-                .placeholder(R.color.blue)
-                .into((ImageView) mOverlayListItemView.findViewById(R.id.image_view_avatar));
+                .placeholder(com.isg245.profileinterface.R.color.blue)
+                .into((ImageView) mOverlayListItemView.findViewById(com.isg245.profileinterface.R.id.image_view_avatar));
 
-        ((TextView) mOverlayListItemView.findViewById(R.id.text_view_name)).setText((String) item.get(EuclidListAdapter.KEY_NAME));
-        ((TextView) mOverlayListItemView.findViewById(R.id.text_view_description)).setText((String) item.get(EuclidListAdapter.KEY_DESCRIPTION_SHORT));
+        ((TextView) mOverlayListItemView.findViewById(com.isg245.profileinterface.R.id.text_view_name)).setText((String) item.get(EuclidListAdapter.KEY_NAME));
+        ((TextView) mOverlayListItemView.findViewById(com.isg245.profileinterface.R.id.text_view_description)).setText((String) item.get(EuclidListAdapter.KEY_DESCRIPTION_SHORT));
         setProfileDetailsInfo(item);
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -211,7 +210,7 @@ public abstract class EuclidActivity extends Activity {
      * @return - animator object that starts circle reveal animation.
      */
     private SupportAnimator getAvatarRevealAnimator() {
-        final LinearLayout mWrapperListItemReveal = (LinearLayout) mOverlayListItemView.findViewById(R.id.wrapper_list_item_reveal);
+        final LinearLayout mWrapperListItemReveal = (LinearLayout) mOverlayListItemView.findViewById(com.isg245.profileinterface.R.id.wrapper_list_item_reveal);
 
         int finalRadius = Math.max(mOverlayListItemView.getWidth(), mOverlayListItemView.getHeight());
 
@@ -301,7 +300,7 @@ public abstract class EuclidActivity extends Activity {
      */
     private void createOpenProfileButtonAnimation() {
         if (mProfileButtonShowAnimation == null) {
-            mProfileButtonShowAnimation = AnimationUtils.loadAnimation(this, R.anim.profile_button_scale);
+            mProfileButtonShowAnimation = AnimationUtils.loadAnimation(this, com.isg245.profileinterface.R.anim.profile_button_scale);
             mProfileButtonShowAnimation.setDuration(getAnimationDurationShowProfileButton());
             mProfileButtonShowAnimation.setInterpolator(new AccelerateInterpolator());
             mProfileButtonShowAnimation.setAnimationListener(new Animation.AnimationListener() {
@@ -372,7 +371,7 @@ public abstract class EuclidActivity extends Activity {
     private Animator getOpenProfileDetailsAnimator() {
         Animator mOpenProfileDetailsAnimator = ObjectAnimator.ofFloat(mProfileDetails, View.Y,
                 getResources().getDisplayMetrics().heightPixels,
-                getResources().getDimensionPixelSize(R.dimen.height_profile_picture_with_toolbar));
+                getResources().getDimensionPixelSize(com.isg245.profileinterface.R.dimen.height_profile_picture_with_toolbar));
         return mOpenProfileDetailsAnimator;
     }
 
@@ -469,7 +468,7 @@ public abstract class EuclidActivity extends Activity {
                         sScreenWidth / 2 - dpToPx(getCircleRadiusDp() * 2),
                         sProfileImageHeight / 2 - dpToPx(getCircleRadiusDp() * 2)),
                 new float[]{radius, radius, radius, radius, radius, radius, radius, radius}));
-        overlay.getPaint().setColor(getResources().getColor(R.color.gray));
+        overlay.getPaint().setColor(getResources().getColor(com.isg245.profileinterface.R.color.gray));
 
         return overlay;
     }
@@ -490,14 +489,14 @@ public abstract class EuclidActivity extends Activity {
     /**
      * To use EuclidActivity class, at least this method must be implemented, with your own data.
      *
-     * @return - adapter with data. Check {@link com.yalantis.euclid.library.EuclidListAdapter}
+     * @return - adapter with data. Check {@link EuclidListAdapter}
      */
     protected abstract BaseAdapter getAdapter();
 
     /**
      * Returns current profile details state.
      *
-     * @return - {@link com.yalantis.euclid.library.EuclidState}
+     * @return - {@link EuclidState}
      */
     public EuclidState getState() {
         return mState;
